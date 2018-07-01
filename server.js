@@ -20,7 +20,7 @@ app.get('/pagecount', function (req, res) {
 });
 
 app.post('/action', function (req, res) {
-  console.log('Got request', req);
+  console.log('Got request', req.body);
   res.send('{ status: OK}');
 });
 
