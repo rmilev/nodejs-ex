@@ -8,7 +8,11 @@ Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
+<<<<<<< HEAD
 app.use(bodyParser.json());
+=======
+app.use(bodyParser);
+>>>>>>> 2fc48aff5bcf60cda071f50b7daa8a7175da7df1
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
