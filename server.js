@@ -7,6 +7,7 @@ Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
+app.use(express.bodyParser());
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
@@ -20,7 +21,7 @@ app.get('/pagecount', function (req, res) {
 });
 
 app.post('/action', function (req, res) {
-  console.log('Got request', req.body);
+  console.dir(req.body);
   res.send('{ status: OK}');
 });
 
