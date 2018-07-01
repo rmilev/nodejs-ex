@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/pagecount', function (req, res) {
-  res.send('{ pageCount: 1000}');
+  res.send('{ pageCount: '+process.env.username+'}');
 });
 
 // error handling
