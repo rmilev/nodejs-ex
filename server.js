@@ -19,6 +19,11 @@ app.get('/pagecount', function (req, res) {
   res.send('{ pageCount: '+process.env.username+'}');
 });
 
+app.post('/action', function (req, res) {
+  console.log('Got request', req);
+  res.send('{ status: OK}');
+});
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
