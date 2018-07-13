@@ -2,13 +2,25 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    pulse   = require('adt-pulse');
 
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
 app.use(bodyParser.json());
+
+var myAlarm = new pulse(process.env.username, process.env.password);
+
+// Register Callbacks:
+myAlarm.onStatusUpdate(function(a) {
+  console.log("Status updated..");
+  console.log(a);
+});
+
+// Login - gets all devices, zones and status and invokes callbacks:
+myAlarm.pulse();
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
@@ -18,7 +30,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/pagecount', function (req, res) {
-  res.send('{ pageCount: '+process.env['adt-creds'].username+'}');
+  res.send('{ pageCount: '+process.env.username+'}');
 });
 
 app.post('/action', function (req, res) {
