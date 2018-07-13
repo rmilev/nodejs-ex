@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 var myAlarm = new pulse(process.env.username, process.env.password);
 
+
 // Register Callbacks:
 myAlarm.onStatusUpdate(function(a) {
   console.log("Status updated..");
