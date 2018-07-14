@@ -4,7 +4,7 @@
   "description": "Node.js sample app for OpenShift 3",
   "main": "server.js",
   "dependencies": {
-    "adt-pulse": "rmilev/adt-pulse",
+    "adt-pulse-simple": "rmilev/adt-pulse",
     "body-parser": "^1.18.3",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
