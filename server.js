@@ -3,7 +3,7 @@ var express = require('express'),
     app     = express(),
     morgan  = require('morgan'),
     bodyParser = require('body-parser');
-    pulse   = require('adt-pulse-simple')(process.env.username, process.env.password);
+    pulse   = require('./index.js')(process.env.username, process.env.password);
 
 
 Object.assign=require('object-assign')
