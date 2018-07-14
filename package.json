@@ -11,7 +11,11 @@
     "express": "^4.13.4",
     "mocha": "^2.4.5",
     "morgan": "^1.7.0",
-    "object-assign": "4.1.0"
+    "object-assign": "4.1.0",
+    "cheerio": "latest",
+    "q": "~1.0.1",
+    "request": "latest",
+    "tough-cookie": "^2.4.3"
   },
   "engine": {
     "node": "*",
