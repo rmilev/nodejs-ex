@@ -42,10 +42,10 @@ app.post('/action', function (req, res) {
   deciphered += decipher.final('utf8');
   console.dir(req.body);
   if(deciphered !== process.env.value){
-    console.log('Arming..');
     res.send('{ Unauthorised }');
   }
   else if(req.body['@token'] === 'away'){
+    console.log('Arming away..');
     Pulse.setAlarmStateAway();
   }
   else if(req.body['@token'] === 'stay'){
