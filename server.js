@@ -42,6 +42,18 @@ app.post('/action', function (req, res) {
   deciphered += decipher.final('utf8');
   console.dir(req.body);
   console.log(deciphered);
+  if(deciphered !== process.env.value){
+    res.send('{ Unauthorised }');
+  }
+  else if(req.body['@token'] === 'away'){
+    Pulse.setAlarmStateAway();
+  }
+  else if(req.body['@token'] === 'stay'){
+    Pulse.setAlarmStateStay();
+  }
+  else if(req.body['@token'] === 'off'){
+    Pulse.setAlarmStateOff();
+  }
   res.send('{ status: OK}');
 });
 
