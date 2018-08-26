@@ -2,8 +2,10 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan'),
-    bodyParser = require('body-parser');
-    pulse   = require('adt-pulse-simple');
+    bodyParser = require('body-parser'),
+    pulse   = require('adt-pulse-simple'),
+    crypto = require('crypto');
+
 
 
 Object.assign=require('object-assign')
@@ -35,7 +37,11 @@ app.get('/pagecount', function (req, res) {
 });
 
 app.post('/action', function (req, res) {
+  var decipher = crypto.createDecipher('aes256', process.env.key);
+  var deciphered = decipher.update(req.body['@token'], 'hex', 'utf8');
+  deciphered += decipher.final('utf8');
   console.dir(req.body);
+  console.log(deciphered);
   res.send('{ status: OK}');
 });
 
