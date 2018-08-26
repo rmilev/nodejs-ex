@@ -42,16 +42,18 @@ app.post('/action', function (req, res) {
   deciphered += decipher.final('utf8');
   console.dir(req.body);
   if(deciphered !== process.env.value){
-    res.send('{ Unauthorised }');
+    res.send('{ status: Unauthorised }');
   }
-  else if(req.body['@alarm'] === 'away'){
+  else if(req.body.alarm === 'away'){
     console.log('Arming away..');
     Pulse.setAlarmStateAway();
   }
-  else if(req.body['@alarm'] === 'stay'){
+  else if(req.body.alarm === 'stay'){
+    console.log('Arming stay..');
     Pulse.setAlarmStateStay();
   }
-  else if(req.body['@alarm'] === 'off'){
+  else if(req.body.alarm === 'off'){
+    console.log('Disarming..');
     Pulse.setAlarmStateOff();
   }
   res.send('{ status: OK}');
