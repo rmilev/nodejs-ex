@@ -41,8 +41,8 @@ app.post('/action', function (req, res) {
   var deciphered = decipher.update(req.body['@token'], 'hex', 'utf8');
   deciphered += decipher.final('utf8');
   console.dir(req.body);
-  console.log(deciphered);
   if(deciphered !== process.env.value){
+    console.log('Arming..');
     res.send('{ Unauthorised }');
   }
   else if(req.body['@token'] === 'away'){
