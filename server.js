@@ -44,14 +44,14 @@ app.post('/action', function (req, res) {
   if(deciphered !== process.env.value){
     res.send('{ Unauthorised }');
   }
-  else if(req.body['@token'] === 'away'){
+  else if(req.body['@token'] == 'away'){
     console.log('Arming away..');
     Pulse.setAlarmStateAway();
   }
-  else if(req.body['@token'] === 'stay'){
+  else if(req.body['@token'] == 'stay'){
     Pulse.setAlarmStateStay();
   }
-  else if(req.body['@token'] === 'off'){
+  else if(req.body['@token'] == 'off'){
     Pulse.setAlarmStateOff();
   }
   res.send('{ status: OK}');
