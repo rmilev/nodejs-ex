@@ -4,7 +4,8 @@ var express = require('express'),
     morgan  = require('morgan'),
     bodyParser = require('body-parser'),
     pulse   = require('adt-pulse-simple'),
-    crypto = require('crypto');
+    crypto = require('crypto'),
+    https = require('https');
 
 
 
@@ -33,7 +34,24 @@ app.get('/', function (req, res) {
 });
 
 app.get('/pagecount', function (req, res) {
-  res.send('{ pageCount: '+process.env.username+'}');
+  https.get(process.env.away, (resp) => {
+  let data = '';
+
+  // A chunk of data has been recieved.
+  resp.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    // The whole response has been received. Print out the result.
+    resp.on('end', () => {
+      console.log(JSON.parse(data).explanation);
+    });
+
+  }).on("error", (err) => {
+    console.log("Error: " + err.message);
+  });
+
+  res.send('{ pageCount: }');
 });
 
 app.post('/action', function (req, res) {
