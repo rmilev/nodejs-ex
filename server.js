@@ -21,6 +21,32 @@ var Pulse = new pulse(process.env.username, process.env.password)
 Pulse.onStatusUpdate(function(a) {
   console.log("Status updated..");
   console.log(a);
+  var callUrl;
+
+  if(a.startsWith("Armed Stay.")){
+    callUrl = process.env.stay
+  }
+  else if(a.startsWith("Armed Away.")){
+    callUrl = process.env.away
+  }
+   else if(a.startsWith("Disarmed.")){
+    callUrl = process.env.off
+  }
+
+  https.get(callUrl, (resp) => {
+  let data = '';
+  // A chunk of data has been recieved.
+  resp.on('data', (chunk) => {
+      data += chunk;
+    });
+    // The whole response has been received. Print out the result.
+    resp.on('end', () => {
+      console.log(JSON.parse(data).explanation);
+    });
+
+  }).on("error", (err) => {
+    console.log("Error: " + err.message);
+  });
 });
 
 // Login - gets all devices, zones and status and invokes callbacks:
@@ -33,28 +59,7 @@ app.get('/', function (req, res) {
   res.render('index.html');
 });
 
-function makeRequest(url){
-  https.get(url, (resp) => {
-  let data = '';
-
-  // A chunk of data has been recieved.
-  resp.on('data', (chunk) => {
-      data += chunk;
-    });
-
-    // The whole response has been received. Print out the result.
-    resp.on('end', () => {
-      console.log(JSON.parse(data).explanation);
-    });
-
-  }).on("error", (err) => {
-    console.log("Error: " + err.message);
-  });
-}
-
 app.get('/pagecount', function (req, res) {
-  makeRequest(process.env.away);
-
   res.send('{ pageCount: }');
 });
 
