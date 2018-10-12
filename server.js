@@ -34,6 +34,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/pagecount', function (req, res) {
+  console.log("Gonna call" + process.env.away);
   https.get(process.env.away, (resp) => {
   let data = '';
 
