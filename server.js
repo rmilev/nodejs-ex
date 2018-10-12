@@ -24,14 +24,15 @@ Pulse.onStatusUpdate(function(a) {
   var callUrl;
 
   if(a.startsWith("Armed Stay.")){
-    callUrl = process.env.stay
+    callUrl = process.env.stay;
   }
   else if(a.startsWith("Armed Away.")){
-    callUrl = process.env.away
+    callUrl = process.env.away;
   }
    else if(a.startsWith("Disarmed.")){
-    callUrl = process.env.off
+    callUrl = process.env.off;
   }
+  console.log("callUrl is "+callUrl);
 
   https.get(callUrl, (resp) => {
   let data = '';
