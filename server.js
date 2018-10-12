@@ -33,9 +33,8 @@ app.get('/', function (req, res) {
   res.render('index.html');
 });
 
-app.get('/pagecount', function (req, res) {
-  console.log("Gonna call" + process.env.away);
-  https.get(process.env.away, (resp) => {
+function makeRequest(url){
+  https.get(url, (resp) => {
   let data = '';
 
   // A chunk of data has been recieved.
@@ -51,6 +50,10 @@ app.get('/pagecount', function (req, res) {
   }).on("error", (err) => {
     console.log("Error: " + err.message);
   });
+}
+
+app.get('/pagecount', function (req, res) {
+  makeRequest(process.env.away);
 
   res.send('{ pageCount: }');
 });
