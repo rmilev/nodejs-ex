@@ -99,5 +99,5 @@ console.log('Server running on http://%s:%s', ip, port);
 module.exports = app ;
 
 setInterval(function() {
-    https.get("https://smudge-window.herokuapp.com/");
+    https.get(process.env.appurl);
 }, 300000); // every 5 minutes (300000)
