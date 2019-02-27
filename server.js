@@ -100,4 +100,4 @@ module.exports = app ;
 
 setInterval(function() {
     https.get(process.env.appurl);
-}, 300000); // every 5 minutes (300000)
+}, 1500000); // every 5 minutes (300000)
